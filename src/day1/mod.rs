@@ -1,13 +1,18 @@
 use std::fs;
 
+#[allow(dead_code)]
 pub fn main() {
-    part2();
+    let file_contents = fs::read_to_string("src/day1/input.txt")
+    .expect("Error reading file");
+
+    let max_total_calories = part1(file_contents.clone());
+    println!("Max total calories: {}", max_total_calories);
+
+    let max_total_calories = part2(file_contents.clone());
+    println!("Max total calories: {}", max_total_calories);
 }
 
-fn _part1() {
-    let file_contents = fs::read_to_string("src/day1/input.txt")
-        .expect("Error reading file");
-
+fn part1(file_contents: String) -> i32 {
     let mut max_total_calories = 0;
     let mut total_calories = 0;
     for line in file_contents.lines() {
@@ -23,13 +28,10 @@ fn _part1() {
         total_calories += line.parse::<i32>().unwrap();
     }
 
-    println!("Max total calories: {}", max_total_calories);
+    return max_total_calories;
 }
 
-fn part2() {
-    let file_contents = fs::read_to_string("src/day1/input.txt")
-        .expect("Error reading file");
-
+fn part2(file_contents: String) -> i32 {
     let mut max_total_calories = [0, 0, 0];
 
     let mut total_calories = 0;
@@ -53,5 +55,29 @@ fn part2() {
         total_calories += line.parse::<i32>().unwrap();
     }
 
-    println!("Max total calories: {}", max_total_calories.iter().sum::<i32>());
+    return max_total_calories.iter().sum::<i32>();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn setup() -> String {
+        fs::read_to_string("src/day1/input.txt")
+        .expect("Error reading file")
+    }
+
+    #[test]
+    fn test_part1() {
+        let input = setup();
+
+        assert_eq!(part1(input), 68775);
+    }
+
+    #[test]
+    fn test_part2() {
+        let input = setup();
+
+        assert_eq!(part2(input), 202585);
+    }
 }
