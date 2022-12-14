@@ -1,9 +1,8 @@
-use std::fs;
+use crate::_utils::read_input;
 
 #[allow(dead_code)]
 pub fn main() {
-    let file_contents = fs::read_to_string("src/day4/input.txt")
-    .expect("Error reading file");
+    let file_contents = read_input("src/day4/input.txt");
 
     let result = part1(file_contents.clone());
     println!("result: {}", result);
@@ -118,8 +117,7 @@ mod tests {
     use super::*;
 
     fn setup() -> String {
-        fs::read_to_string("src/day4/input.txt")
-        .expect("Error reading file")
+        read_input("src/day4/input.txt")
     }
 
     #[allow(dead_code)]

@@ -1,10 +1,9 @@
-use std::fs;
+use crate::_utils::read_input;
 use std::collections::HashMap;
 
 #[allow(dead_code)]
 pub fn main() {
-    let file_contents = fs::read_to_string("src/day2/input.txt")
-    .expect("Error reading file");
+    let file_contents = read_input("src/day2/input.txt");
 
     let my_score = part1(file_contents.clone());
     println!("Total score: {}", my_score);
@@ -146,8 +145,7 @@ mod tests {
     use super::*;
 
     fn setup() -> String {
-        fs::read_to_string("src/day2/input.txt")
-        .expect("Error reading file")
+        read_input("src/day2/input.txt")
     }
 
     #[test]

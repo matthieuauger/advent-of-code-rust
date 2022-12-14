@@ -1,9 +1,8 @@
-use std::fs;
+use crate::_utils::read_input;
 
 #[allow(dead_code)]
 pub fn main() {
-    let file_contents = fs::read_to_string("src/day1/input.txt")
-    .expect("Error reading file");
+    let file_contents = read_input("src/day1/input.txt");
 
     let max_total_calories = part1(file_contents.clone());
     println!("Max total calories: {}", max_total_calories);
@@ -63,8 +62,7 @@ mod tests {
     use super::*;
 
     fn setup() -> String {
-        fs::read_to_string("src/day1/input.txt")
-        .expect("Error reading file")
+        return read_input("src/day1/input.txt");
     }
 
     #[test]

@@ -1,9 +1,8 @@
-use std::{fs, collections::HashSet};
+use crate::_utils::{read_input, split_string_middle, find_common_item, find_common_item_in_three_strings};
 
 #[allow(dead_code)]
 pub fn main() {
-    let file_contents = fs::read_to_string("src/day3/input.txt")
-    .expect("Error reading file");
+    let file_contents = read_input("src/day3/input.txt");
 
     let priority_sum = part1(file_contents.clone());
     println!("Sum priority: {}", priority_sum);
@@ -17,7 +16,7 @@ fn part1(file_contents: String) -> u32 {
     let mut misplaced_items = Vec::new();
 
     for rucksack_content in file_contents.lines() {
-        let (compartment_1, compartment_2) = get_rucksack_compartments(rucksack_content.to_string());
+        let (compartment_1, compartment_2) = split_string_middle(rucksack_content.to_string());
 
         misplaced_items.push(
             get_priority(
@@ -40,7 +39,7 @@ fn part2(file_contents: String) -> u32 {
         if (index + 1) % 3 == 0 {
             badge_priorities.push(
                 get_priority(
-                    find_common_item_in_three_compartments(
+                    find_common_item_in_three_strings(
                         group_rucksacks[0].clone(),
                         group_rucksacks[1].clone(),
                         group_rucksacks[2].clone()
@@ -53,32 +52,6 @@ fn part2(file_contents: String) -> u32 {
     }
 
     return badge_priorities.iter().sum::<u32>();
-}
-
-fn get_rucksack_compartments(rucksack_content: String) -> (String, String) {
-    let (compartment_1, compartment_2) = rucksack_content.split_at(rucksack_content.len() / 2);
-    
-    return (compartment_1.to_string(), compartment_2.to_string());
-}
-
-fn find_common_item(compartment_1: String, compartment_2: String) -> char {
-    let compartment_1_chars: HashSet<char> = compartment_1.chars().collect();
-    let compartment_2_chars: HashSet<char> = compartment_2.chars().collect();
-    
-    let common_chars: HashSet<char> = compartment_1_chars.intersection(&compartment_2_chars).cloned().collect();
-
-    return *common_chars.iter().next().unwrap();
-}
-
-fn find_common_item_in_three_compartments(compartment_1: String, compartment_2: String, compartment_3: String) -> char {
-    let compartment_1_chars: HashSet<char> = compartment_1.chars().collect();
-    let compartment_2_chars: HashSet<char> = compartment_2.chars().collect();
-    let compartment_3_chars: HashSet<char> = compartment_3.chars().collect();
-    
-    let common_chars: HashSet<char> = compartment_1_chars.intersection(&compartment_2_chars).cloned().collect();
-    let common_chars: HashSet<char> = common_chars.intersection(&compartment_3_chars).cloned().collect();
-
-    return *common_chars.iter().next().unwrap();
 }
 
 fn get_priority(item: char) -> u32 {
@@ -96,8 +69,7 @@ mod tests {
     use super::*;
 
     fn setup() -> String {
-        fs::read_to_string("src/day3/input.txt")
-        .expect("Error reading file")
+        read_input("src/day3/input.txt")
     }
 
     #[test]
@@ -108,9 +80,9 @@ mod tests {
     }
 
     #[test]
-    fn test_get_rucksack_compartments() {
+    fn test_split_string_middle() {
         assert_eq!(
-            get_rucksack_compartments("abcdef".to_string()),
+            split_string_middle("abcdef".to_string()),
             ("abc".to_string(), "def".to_string())
         );
     }
@@ -129,8 +101,8 @@ mod tests {
     }
 
     #[test]
-    fn test_find_common_item_in_three_compartments() {
+    fn test_find_common_item_in_three_strings() {
         assert_eq!(
-            find_common_item_in_three_compartments("abc".to_string(), "ade".to_string(), "ade".to_string()), 'a');
+            find_common_item_in_three_strings("abc".to_string(), "ade".to_string(), "ade".to_string()), 'a');
     }
 }
