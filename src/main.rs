@@ -9,5 +9,5 @@ mod day6;
 
 fn main() {
     env_logger::init();
-    day5::main()
+    day6::main()
 }
