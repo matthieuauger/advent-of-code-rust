@@ -36,8 +36,6 @@ fn part2(file_contents: String) -> u32 {
             assignation_2.clone()
         );
 
-        println!("assignation: {}, overlap: {}", pair_assignations, count);
-
         if count > 0 {
             overlapped_assignations_count += 1;
         }
