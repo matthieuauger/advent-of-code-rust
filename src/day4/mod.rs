@@ -4,14 +4,14 @@ use crate::_utils::read_input;
 pub fn main() {
     let file_contents = read_input("src/day4/input.txt");
 
-    let result = part1(file_contents.clone());
+    let result = part1(&file_contents);
     println!("result: {}", result);
 
-    let result = part2(file_contents.clone());
+    let result = part2(&file_contents);
     println!("result: {}", result);
 }
 
-fn part1(file_contents: String) -> u32 {
+fn part1(file_contents: &String) -> u32 {
 
     let mut full_overlapped_assignations = Vec::new();
     for pair_assignations in file_contents.lines() {
@@ -25,7 +25,7 @@ fn part1(file_contents: String) -> u32 {
     return full_overlapped_assignations.iter().count() as u32;
 }
 
-fn part2(file_contents: String) -> u32 {
+fn part2(file_contents: &String) -> u32 {
 
     let mut overlapped_assignations_count = 0u32;
     for pair_assignations in file_contents.lines() {
@@ -122,7 +122,7 @@ mod tests {
     fn test_part1() {
         let input = setup();
 
-        assert_eq!(part1(input), 8243);
+        assert_eq!(part1(&input), 8243);
     }
 
     #[test]

@@ -4,14 +4,14 @@ use crate::_utils::{read_input, split_string_middle, find_common_item, find_comm
 pub fn main() {
     let file_contents = read_input("src/day3/input.txt");
 
-    let priority_sum = part1(file_contents.clone());
+    let priority_sum = part1(&file_contents);
     println!("Sum priority: {}", priority_sum);
 
-    let priority_sum = part2(file_contents.clone());
+    let priority_sum = part2(&file_contents);
     println!("Badge Sum priority: {}", priority_sum);
 }
 
-fn part1(file_contents: String) -> u32 {
+fn part1(file_contents: &String) -> u32 {
 
     let mut misplaced_items = Vec::new();
 
@@ -28,7 +28,7 @@ fn part1(file_contents: String) -> u32 {
     return misplaced_items.iter().sum::<u32>();
 }
 
-fn part2(file_contents: String) -> u32 {
+fn part2(file_contents: &String) -> u32 {
 
     let mut badge_priorities = Vec::new();
 
@@ -76,7 +76,7 @@ mod tests {
     fn test_part1() {
         let input = setup();
 
-        assert_eq!(part1(input), 8243);
+        assert_eq!(part1(&input), 8243);
     }
 
     #[test]

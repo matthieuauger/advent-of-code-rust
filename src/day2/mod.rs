@@ -5,10 +5,10 @@ use std::collections::HashMap;
 pub fn main() {
     let file_contents = read_input("src/day2/input.txt");
 
-    let my_score = part1(file_contents.clone());
+    let my_score = part1(&file_contents);
     println!("Total score: {}", my_score);
 
-    let my_score = part2(file_contents.clone());
+    let my_score = part2(&file_contents);
     println!("Total score: {}", my_score);
 }
 
@@ -26,7 +26,7 @@ enum Result {
     Draw,
 }
 
-fn part1(file_contents: String) -> i32 {
+fn part1(file_contents: &String) -> i32 {
     use crate::day2::RockPaperScissors::{Paper, Rock, Scissors};
     use crate::day2::Result::{Draw, Lose, Win};
 
@@ -76,7 +76,7 @@ fn part1(file_contents: String) -> i32 {
     return my_score;
 }
 
-fn part2(file_contents: String) -> i32 {
+fn part2(file_contents: &String) -> i32 {
     use crate::day2::RockPaperScissors::{Paper, Rock, Scissors};
     use crate::day2::Result::{Draw, Lose, Win};
 
@@ -152,13 +152,13 @@ mod tests {
     fn test_part1() {
         let input = setup();
 
-        assert_eq!(part1(input), 15691);
+        assert_eq!(part1(&input), 15691);
     }
 
     #[test]
     fn test_part2() {
         let input = setup();
 
-        assert_eq!(part2(input), 12989);
+        assert_eq!(part2(&input), 12989);
     }
 }

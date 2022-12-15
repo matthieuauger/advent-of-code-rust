@@ -6,9 +6,7 @@ use std::str;
 pub fn main() {
     let file_contents = read_input("src/day5/input.txt");
 
-    part1(file_contents.clone());
-
-    _part2(file_contents.clone());
+    part1(&file_contents);
 }
 
 #[derive(Debug)]
@@ -18,7 +16,7 @@ struct Instructions {
     to: u16,
 }
 
-fn part1(file_contents: String) -> u32 {
+fn part1(file_contents: &String) -> u32 {
     let mut crate_file_contents = String::new();
 
     let mut crate_stacks: Vec<Vec<char>> = Vec::new();
@@ -143,11 +141,6 @@ fn move_stack_9001(crate_stacks: &Vec<Vec<char>>, instructions: Instructions) ->
     }
     
     return updated_crate_stacks;
-}
-
-
-fn _part2(_file_contents: String) -> u32 {
-    return 0;
 }
 
 #[cfg(test)]
